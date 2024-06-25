@@ -125,6 +125,7 @@ func main() {
 		}),
 	)
 	desk.SetSystemTrayMenu(menu)
+	desk.SetSystemTrayIcon(theme.TrayIcon())
 
 	w.ShowAndRun()
 }
