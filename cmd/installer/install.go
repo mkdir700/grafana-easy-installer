@@ -120,14 +120,17 @@ func createStep3(w fyne.Window, installDir string) fyne.CanvasObject {
 	label.Wrapping = fyne.TextWrapWord
 
 	// 勾选框
-	check := widget.NewCheck("创建桌面快捷方式", func(checked bool) {
-		if checked {
-			createShortcut(installDir)
-		}
-	})
-	check.Checked = true
+	check := widget.NewCheck("创建桌面快捷方式", func(checked bool) {})
+	check.SetChecked(true)
 
 	finishButton := widget.NewButton("完成", func() {
+		if check.Checked {
+			err := createShortcut(installDir)
+			if err != nil {
+				fmt.Println("创建快捷方式失败: ", err)
+			}
+		}
+
 		w.Close()
 	})
 
