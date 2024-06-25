@@ -1,0 +1,13 @@
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Go workspace file
+go.work
+
+# Go module files
+go.sum
+
+dist
+
+resources/resources
+resources/*.exe
