@@ -13,7 +13,7 @@ func main() {
 	// 设置自定义字体
 	theme.Apply(a)
 
-	w := a.NewWindow("GraphanaLabs 安装程序")
+	w := a.NewWindow("GrafanaLabs 安装程序")
 
 	// 设置窗口大小
 	w.Resize(fyne.NewSize(500, 250))
