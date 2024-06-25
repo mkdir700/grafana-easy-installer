@@ -2,7 +2,6 @@ package theme
 
 import (
 	_ "embed"
-	"grafana_labs/icon"
 	"image/color"
 
 	"fyne.io/fyne/v2"
@@ -11,6 +10,9 @@ import (
 
 //go:embed fonts/NotoSansSC-Regular.ttf
 var NotoSansSCRegularTTF []byte
+
+//go:embed icon/grafana.256x256.png
+var Icon []byte
 
 func Apply(app fyne.App) {
 	// 创建自定义主题
@@ -30,12 +32,13 @@ func (m *CustomTheme) Color(name fyne.ThemeColorName, variant fyne.ThemeVariant)
 }
 
 func (m *CustomTheme) Icon(name fyne.ThemeIconName) fyne.Resource {
-	return &fyne.StaticResource{
-		StaticName:    "icon",
-		StaticContent: icon.Icon,
-	}
+	return theme.DefaultTheme().Icon(name)
 }
 
 func (m *CustomTheme) Size(name fyne.ThemeSizeName) float32 {
 	return theme.DefaultTheme().Size(name)
+}
+
+func TrayIcon() fyne.Resource {
+	return fyne.NewStaticResource("icon.png", Icon)
 }
