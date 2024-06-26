@@ -9,5 +9,13 @@ go.sum
 
 dist
 
-resources/resources
 resources/*.exe
+assets/resources.7z
+resources/resources/grafana/data/*
+!resources/resources/grafana/data/grafana.db
+resources/resources/grafana/docs
+resources/resources/grafana/packaging
+resources/resources/grafana/Dockerfile
+resources/resources/grafana/LICENSE
+resources/resources/grafana/README.md
+resources/resources/grafana/NOTICE.md

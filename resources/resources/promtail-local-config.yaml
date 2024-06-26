@@ -1,0 +1,236 @@
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions.yaml
+
+clients:
+  - url: http://localhost:3100/loki/api/v1/push
+
+scrape_configs:
+  - job_name: studio-max
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          __path__: C:\Users\xyz\xyz_log\xyz_studio_max\*INFO*
+          job: studio-max
+    pipeline_stages:
+      # E20240425 08:41:25.902122 25576 node.cc:858] Node not found: "" (relative to "/root ")
+      - regex:
+          expression: '^(?P<level>[EWI])(?P<date>\d{8}) (?P<time>\d{2}:\d{2}:\d{2}\.\d{6})\s+(?P<thread_id>\d+) (?P<file>[\w\.]+):(?P<line>\d+)\] (?P<message>.*)'
+      - replace:
+          expression: '^(?P<level>I)$'
+          replace: 'INFO'
+          source: level
+      - replace:
+          expression: '^(?P<level>E)$'
+          replace: 'ERROR'
+          source: level
+      - replace:
+          expression: '^(?P<level>W)$'
+          replace: 'WARN'
+          source: level
+      - template:
+          source: time
+          template: '{{ .date }} {{ .time }}'
+      - timestamp:
+          source: time
+          format: '20060102 15:04:05.000000'
+          location: Asia/Shanghai
+      - labels:
+          level:
+          thread_id:
+          file:
+          line:
+          message:
+          timestamp:
+
+  - job_name: vision-log-viewer
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          __path__: C:\Users\xyz\xyz_log\vision_log_viewer\*
+          job: vision-log-viewer
+
+  - job_name: xvp-bin
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          __path__: C:\Users\xyz\xyz_log\xvp_bin\*
+          job: xvp-bin
+    # E20240605 09:10:43.212921 34944 Node.cpp:71] Node Data Model Initialize failed:
+    # { "error_code" : "69999", "error_msg" : "世界指针为空.", "tips" : "请运行完整的Studio Max" }
+    pipeline_stages:
+      - multiline:
+          firstline: '^[EWI]\d{8} \d{2}:\d{2}:\d{2}\.\d{6}'
+          max_wait_time: 3s
+      - regex:
+          expression: '^(?P<level>[EWI])(?P<date>\d{8}) (?P<time>\d{2}:\d{2}:\d{2}\.\d{6}) (?P<thread_id>\d+) (?P<file>[\w\.]+):(?P<line>\d+)\] (?P<message>.*)'
+      # - template:
+      #     source: time
+      #     template: '{{ .date }} {{ .time }}'
+      # - timestamp:
+      #     source: time
+      #     format: '20060102 15:04:05.000000'
+      - labels:
+          level:
+          thread_id:
+          file:
+          line:
+          message:
+
+  - job_name: robot-server
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          __path__: C:\Users\xyz\xyz_log\xyz_robot_server\*
+          job: robot-server
+    pipeline_stages:
+      - multiline:
+          firstline: '^[EWI]\d{4} \d{2}:\d{2}:\d{2}\.\d{6} \d+ '
+          max_lines: 100
+          max_wait_time: 3s
+      - regex:
+          # robot_server.py.20240425-084142.115955
+          source: filename
+          expression: '.*robot_server\.py\.(?P<date>\d{8})-\d{6}\.\d{6}'
+      - regex:
+          expression: '^(?P<level>[EWI])\d{4} (?P<time>\d{2}:\d{2}:\d{2}\.\d{6}) (?P<thread_id>\d+) (?P<file>[\w\.]+):(?P<line>\d+)\] (?P<message>.*)'
+      - replace:
+          expression: '^(?P<level>I)$'
+          replace: 'INFO'
+          source: level
+      - replace:
+          expression: '^(?P<level>E)$'
+          replace: 'ERROR'
+          source: level
+      - replace:
+          expression: '^(?P<level>W)$'
+          replace: 'WARN'
+          source: level
+      - template:
+          source: time
+          template: '{{ .date }} {{ .time }}'
+      - timestamp:
+          source: time
+          format: '20060102 15:04:05.000000'
+          location: Asia/Shanghai
+      - labels:
+          level:
+          thread_id:
+          file:
+          line:
+          message:
+          timestamp:
+
+  - job_name: hmi-server
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          __path__: C:\Users\xyz\xyz_log\xyz_max_hmi\server\**\*log
+          job: hmi-server
+    pipeline_stages:
+      - multiline:
+          firstline: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3} \| '
+          max_lines: 1000
+          max_wait_time: 3s
+      - regex:
+          # 2024-06-17 13:23:53.400 | INFO | websockets.legacy.server:handshake:642 - connection open 
+          expression: '^(?P<timestamp>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3}) \| (?P<level>\w+)\s* \| (?P<module>[^:]+):(?P<function>[^:]+):(?P<line>\d+) - (?P<message>[\s\S]*)'
+      - timestamp:
+          source: timestamp
+          format: '2006-01-02 15:04:05.000'
+          location: Asia/Shanghai
+      - labels:
+          level:
+          module:
+          function:
+          line:
+          message:
+          timestamp:
+      - regex:
+          expression: '^(?P<ip>\d+\.\d+\.\d+\.\d+):(?P<port>\d+) - "(?P<method>\w+) (?P<path>[^ ]+) HTTP/(?P<http_version>[^"]+)" (?P<status_code>\d+)'
+          source: message
+      - labels:
+          ip:
+          port:
+          method:
+          path:
+          http_version:
+          status_code:
+      - regex:
+          expression: 'Response\[(?P<request_id>[^\]+]+)\]:(?P<body>[\s\S]*)'
+          source: message
+      - regex:
+          expression: 'Request\[(?P<request_id>[^\]+]+)\]:(?P<body>[\s\S]*)'
+          source: message
+      - labels:
+          request_id:
+          body:
+        
+  - job_name: barcode-scanner
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          __path__: C:\Users\xyz\xyz_log\xyz_barcode_scanner\*log
+          job: barcode-scanner
+
+  - job_name: io-server
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          __path__: C:\Users\xyz\xyz_log\xyz_io\*
+          job: io-server
+    pipeline_stages:
+      - multiline:
+          firstline: '^[EWI]\d{4} \d{2}:\d{2}:\d{2}\.\d{6} \d+ '
+          max_lines: 100
+          max_wait_time: 3s
+      - regex:
+          # io_server_main.py.20240425-084142.115955
+          source: filename
+          expression: '.*io_server_main\.py\.(?P<date>\d{8})-\d{6}\.\d{6}'
+      - regex:
+          expression: '^(?P<level>[EWI])\d{4} (?P<time>\d{2}:\d{2}:\d{2}\.\d{6}) (?P<thread_id>\d+) (?P<file>[\w\.]+):(?P<line>\d+)\] (?P<message>.*)'
+      - replace:
+          expression: '^(?P<level>I)$'
+          replace: 'INFO'
+          source: level
+      - replace:
+          expression: '^(?P<level>E)$'
+          replace: 'ERROR'
+          source: level
+      - replace:
+          expression: '^(?P<level>W)$'
+          replace: 'WARN'
+          source: level
+      - template:
+          source: time
+          template: '{{ .date }} {{ .time }}'
+      - timestamp:
+          source: time
+          format: '20060102 15:04:05.000000'
+          location: Asia/Shanghai
+      - labels:
+          level:
+          thread_id:
+          file:
+          line:
+          message:
+          timestamp:
+
+  - job_name: mf
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          __path__: C:\Users\xyz\xyz_log\xyz_mf_log\**\*log
+          job: mf

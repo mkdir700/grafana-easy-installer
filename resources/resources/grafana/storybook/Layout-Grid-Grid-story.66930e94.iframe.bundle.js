@@ -1,0 +1,48 @@
+"use strict";(self.webpackChunk_grafana_ui=self.webpackChunk_grafana_ui||[]).push([[183],{"../../node_modules/@mdx-js/react/lib/index.js":function(C,h,l){l.d(h,{BN:function(){return p},RP:function(){return o},gz:function(){return u},xA:function(){return v}});var s=l("../../node_modules/react/index.js");const p=s.createContext({});function u(a){return c;function c(d){const g=o(d.components);return s.createElement(a,{...d,allComponents:g})}}function o(a){const c=s.useContext(p);return s.useMemo(()=>typeof a=="function"?a(c):{...c,...a},[c,a])}const m={};function v({components:a,children:c,disableParentContext:d}){let g;return d?g=typeof a=="function"?a({}):a||m:g=o(a),s.createElement(p.Provider,{value:g},c)}},"../../node_modules/react/cjs/react-jsx-runtime.production.min.js":function(C,h,l){/**
+ * @license React
+ * react-jsx-runtime.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */var s=l("../../node_modules/react/index.js"),p=Symbol.for("react.element"),u=Symbol.for("react.fragment"),o=Object.prototype.hasOwnProperty,m=s.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactCurrentOwner,v={key:!0,ref:!0,__self:!0,__source:!0};function a(c,d,g){var f,b={},w=null,P=null;g!==void 0&&(w=""+g),d.key!==void 0&&(w=""+d.key),d.ref!==void 0&&(P=d.ref);for(f in d)o.call(d,f)&&!v.hasOwnProperty(f)&&(b[f]=d[f]);if(c&&c.defaultProps)for(f in d=c.defaultProps,d)b[f]===void 0&&(b[f]=d[f]);return{$$typeof:p,type:c,key:w,ref:P,props:b,_owner:m.current}}h.Fragment=u,h.jsx=a,h.jsxs=a},"../../node_modules/react/jsx-runtime.js":function(C,h,l){C.exports=l("../../node_modules/react/cjs/react-jsx-runtime.production.min.js")},"./src/components/Layout/Grid/Grid.story.tsx":function(C,h,l){l.r(h),l.d(h,{ColumnsMinWidth:function(){return O},ColumnsNumber:function(){return j},default:function(){return J}});var s=l("../../node_modules/react/index.js"),p=l("./src/themes/ThemeContext.tsx"),u=l("../../node_modules/@emotion/css/dist/emotion-css.esm.js"),o=l("./src/components/Layout/utils/responsiveness.tsx"),m=Object.defineProperty,v=Object.defineProperties,a=Object.getOwnPropertyDescriptors,c=Object.getOwnPropertySymbols,d=Object.prototype.hasOwnProperty,g=Object.prototype.propertyIsEnumerable,f=(n,e,r)=>e in n?m(n,e,{enumerable:!0,configurable:!0,writable:!0,value:r}):n[e]=r,b=(n,e)=>{for(var r in e||(e={}))d.call(e,r)&&f(n,r,e[r]);if(c)for(var r of c(e))g.call(e,r)&&f(n,r,e[r]);return n},w=(n,e)=>v(n,a(e)),P=(n,e)=>{var r={};for(var i in n)d.call(n,i)&&e.indexOf(i)<0&&(r[i]=n[i]);if(n!=null&&c)for(var i of c(n))e.indexOf(i)<0&&g.call(n,i)&&(r[i]=n[i]);return r};const y=(0,s.forwardRef)((n,e)=>{const r=n,{alignItems:i,children:S,gap:_,columns:Q,minColumnWidth:Z}=r,q=P(r,["alignItems","children","gap","columns","minColumnWidth"]),ee=(0,p.of)(Y,_,Q,Z,i);return s.createElement("div",w(b({ref:e},q),{className:ee.grid}),S)});y.displayName="Grid";const Y=(n,e,r,i,S)=>({grid:(0,u.AH)([{display:"grid"},(0,o.Y)(n,e,_=>({gap:n.spacing(_)})),i&&(0,o.Y)(n,i,_=>({gridTemplateColumns:`repeat(auto-fill, minmax(${n.spacing(_)}, 1fr))`})),r&&(0,o.Y)(n,r,_=>({gridTemplateColumns:`repeat(${_}, 1fr)`})),(0,o.Y)(n,S,_=>({alignItems:_}))])});try{y.displayName="Grid",y.__docgenInfo={description:"",displayName:"Grid",props:{columns:{defaultValue:null,description:"Number of columns",name:"columns",required:!1,type:{name:"ResponsiveProp<2 | 4 | 1 | 3 | 5 | 6 | 8 | 10 | 7 | 9 | 11 | 12>"}},minColumnWidth:{defaultValue:null,description:"For a responsive layout, fit as many columns while maintaining this minimum column width.\nThe real width will be calculated based on the theme spacing tokens: `theme.spacing(minColumnWidth)`",name:"minColumnWidth",required:!1,type:{name:"ResponsiveProp<2 | 1 | 3 | 5 | 8 | 13 | 21 | 34 | 44 | 55 | 72 | 89 | 144>"}},gap:{defaultValue:null,description:"Specifies the gutters between columns and rows. It is overwritten when a column or row gap has a value.",name:"gap",required:!1,type:{name:"ResponsiveProp<ThemeSpacingTokens>"}},alignItems:{defaultValue:null,description:"",name:"alignItems",required:!1,type:{name:"ResponsiveProp<AlignItems>"}}}},typeof STORYBOOK_REACT_CLASSES<"u"&&(STORYBOOK_REACT_CLASSES["src/components/Layout/Grid/Grid.tsx#Grid"]={docgenInfo:y.__docgenInfo,name:"Grid",path:"src/components/Layout/Grid/Grid.tsx#Grid"})}catch{}var t=l("../../node_modules/react/jsx-runtime.js"),R=l("../../node_modules/@mdx-js/react/lib/index.js"),E=l("../../node_modules/@storybook/blocks/dist/index.mjs");function T(n){const e=Object.assign({h1:"h1",p:"p",a:"a",h2:"h2",h3:"h3",code:"code",ul:"ul",li:"li",strong:"strong",em:"em"},(0,R.RP)(),n.components);return(0,t.jsxs)(t.Fragment,{children:[(0,t.jsx)(E.W8,{title:"MDX|Grid",component:y}),`
+`,(0,t.jsx)(e.h1,{id:"grid",children:"Grid"}),`
+`,(0,t.jsxs)(e.p,{children:["The Grid component is a layout component that allows you to create a grid of columns and rows to organize content and elements. It is a wrapper around the ",(0,t.jsx)(e.a,{href:"https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout",target:"_blank",rel:"nofollow noopener noreferrer",children:"CSS Grid"})," specification."]}),`
+`,(0,t.jsx)(e.h2,{id:"usage",children:"Usage"}),`
+`,(0,t.jsx)(e.h3,{id:"when-to-use",children:"When to use"}),`
+`,(0,t.jsx)(e.p,{children:"Use the Grid component when you want to create structured and organized layouts where content or elements need to be aligned in rows and columns for clarity and consistency."}),`
+`,(0,t.jsx)(e.h3,{id:"when-not-to-use",children:"When not to use"}),`
+`,(0,t.jsxs)(e.p,{children:["Use the ",(0,t.jsx)(e.code,{children:"Stack"})," component instead for these use cases:"]}),`
+`,(0,t.jsxs)(e.ul,{children:[`
+`,(0,t.jsxs)(e.li,{children:[(0,t.jsx)(e.strong,{children:"Alignment:"})," More options for item alignment."]}),`
+`,(0,t.jsxs)(e.li,{children:[(0,t.jsx)(e.strong,{children:"Flex items:"})," Custom flex basis or configure how items stretch and wrap."]}),`
+`]}),`
+`,(0,t.jsx)(e.h2,{id:"properties",children:"Properties"}),`
+`,(0,t.jsx)(e.p,{children:(0,t.jsxs)(e.em,{children:["Note: There is no support for using ",(0,t.jsx)(e.code,{children:"columns"})," and ",(0,t.jsx)(e.code,{children:"minColumnWidth"})," props at the same time. The correct behaviour is working just with one of them not both."]})}),`
+`,(0,t.jsx)(E.ov,{of:y})]})}function X(n={}){const{wrapper:e}=Object.assign({},(0,R.RP)(),n.components);return e?(0,t.jsx)(e,Object.assign({},n,{children:(0,t.jsx)(T,n)})):T(n)}var B=X,U=Object.defineProperty,$=Object.defineProperties,F=Object.getOwnPropertyDescriptors,A=Object.getOwnPropertySymbols,V=Object.prototype.hasOwnProperty,K=Object.prototype.propertyIsEnumerable,I=(n,e,r)=>e in n?U(n,e,{enumerable:!0,configurable:!0,writable:!0,value:r}):n[e]=r,x=(n,e)=>{for(var r in e||(e={}))V.call(e,r)&&I(n,r,e[r]);if(A)for(var r of A(e))K.call(e,r)&&I(n,r,e[r]);return n},G=(n,e)=>$(n,F(e)),k,N,W,L,D,M;const z=Array.from({length:9}).map(()=>({minHeight:`${Math.random()*100+100}px`})),H={title:"General/Layout/Grid",component:y,parameters:{docs:{page:B}},args:{gap:1}},j=n=>{const e=(0,p.$j)();return s.createElement(y,x({},n),Array.from({length:9}).map((r,i)=>s.createElement("div",{key:i,style:x({background:e.colors.background.secondary,textAlign:"center"},z[i])},"N# ",i)))};j.argTypes={alignItems:{control:"select",options:["stretch","flex-start","flex-end","center","baseline","start","end","self-start","self-end"]}},j.args={columns:3},j.parameters={controls:{exclude:["minColumnWidth"]}};const O=n=>{const e=(0,p.$j)();return s.createElement(y,{gap:n.gap,minColumnWidth:n.minColumnWidth},Array.from({length:9}).map((r,i)=>s.createElement("div",{key:i,style:{background:e.colors.background.secondary,textAlign:"center"}},"N# ",i)))};O.args={minColumnWidth:21},O.parameters={controls:{exclude:["columns"]}};var J=H;j.parameters=G(x({},j.parameters),{docs:G(x({},(k=j.parameters)==null?void 0:k.docs),{source:x({originalSource:`args => {
+  const theme = useTheme2();
+  return <Grid {...args}>
+      {Array.from({
+      length: 9
+    }).map((_, i) => <div key={i} style={{
+      background: theme.colors.background.secondary,
+      textAlign: 'center',
+      ...dimensions[i]
+    }}>
+          N# {i}
+        </div>)}
+    </Grid>;
+}`},(W=(N=j.parameters)==null?void 0:N.docs)==null?void 0:W.source)})}),O.parameters=G(x({},O.parameters),{docs:G(x({},(L=O.parameters)==null?void 0:L.docs),{source:x({originalSource:`args => {
+  const theme = useTheme2();
+  return <Grid gap={args.gap} minColumnWidth={args.minColumnWidth}>
+      {Array.from({
+      length: 9
+    }).map((_, i) => <div key={i} style={{
+      background: theme.colors.background.secondary,
+      textAlign: 'center'
+    }}>
+          N# {i}
+        </div>)}
+    </Grid>;
+}`},(M=(D=O.parameters)==null?void 0:D.docs)==null?void 0:M.source)})})},"./src/components/Layout/utils/responsiveness.tsx":function(C,h,l){l.d(h,{Y:function(){return p}});function s(u,o,m,v){const a=o[v];if(a!=null)return{[u.breakpoints.up(v)]:m(a)}}function p(u,o,m){return o==null?null:typeof o!="object"||!("xs"in o)?m(o):[s(u,o,m,"xs"),s(u,o,m,"sm"),s(u,o,m,"md"),s(u,o,m,"lg"),s(u,o,m,"xl"),s(u,o,m,"xxl")]}try{p.displayName="getResponsiveStyle",p.__docgenInfo={description:"Function that converts a ResponsiveProp object into CSS",displayName:"getResponsiveStyle",props:{}},typeof STORYBOOK_REACT_CLASSES<"u"&&(STORYBOOK_REACT_CLASSES["src/components/Layout/utils/responsiveness.tsx#getResponsiveStyle"]={docgenInfo:p.__docgenInfo,name:"getResponsiveStyle",path:"src/components/Layout/utils/responsiveness.tsx#getResponsiveStyle"})}catch{}}}]);
