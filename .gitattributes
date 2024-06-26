@@ -1,1 +1,6 @@
-assets/resources.7z filter=lfs diff=lfs merge=lfs -text
+resources/resources/nssm.exe filter=lfs diff=lfs merge=lfs -text
+resources/resources/loki.exe filter=lfs diff=lfs merge=lfs -text
+resources/resources/promtail.exe filter=lfs diff=lfs merge=lfs -text
+resources/resources/grafana/bin/grafana-cli.exe filter=lfs diff=lfs merge=lfs -text
+resources/resources/grafana/bin/grafana-server.exe filter=lfs diff=lfs merge=lfs -text
+resources/resources/grafana/bin/grafana.exe filter=lfs diff=lfs merge=lfs -text
